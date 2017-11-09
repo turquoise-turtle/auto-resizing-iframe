@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<title>Test</title>
+	</head>
+	<body>
+		<script>
+			var player = document.createElement('iframe');
+			var width = window.innerWidth || document.body.clientWidth;
+			var w = Math.ceil(0.9 * width);
+			var y = 16 / 9;
+			var h = Math.ceil(w / y);
+			player.width = w;
+			player.height = h;
+			var windowsizes = function() {
+				var width = window.innerWidth || document.body.clientWidth;
+				var height = window.innerHeight || document.body.clientHeight;
+				var w = Math.ceil(0.9 * width);
+				var j = Math.ceil(w / y);
+				if (j < height) {
+					var h = Math.ceil(w / y);
+					player.width = w;
+					player.height = h;
+				} else {
+					//console.log('height limit reached')
+				}
+			}
+			player.id = 'ls_embed_1510172232';
+			player.frameborder = 0;
+			player.scrolling = 'no';
+			player.allowfullscreen = ' ';
+			//player.src = 'https://livestream.com/accounts/5690925/events/6124324/player?width=960&height=540&enableInfoAndActivity=true&defaultDrawer=feed&autoPlay=false&mute=false';
+			player.src = 'https://livestream.com/accounts/5690925/events/6124324/player?width=' + w + '&height=' + h + '&enableInfoAndActivity=true&defaultDrawer=feed&autoPlay=false&mute=false';
+			
+			window.addEventListener("resize", windowsizes);
+		</script>
+		<a href="#" onclick="document.body.appendChild(player); this.style.display = 'none';"><img src="play.png" width="60"/></a>
+		<br>
+	</body>
+</html>
