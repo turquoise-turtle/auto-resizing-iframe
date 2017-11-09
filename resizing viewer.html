@@ -1,0 +1,40 @@
+<html>
+	<head>
+		<title>Test</title>
+		<style>
+			iframe {
+				text-align: center;
+				/*width: 100%;*/
+				margin: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<script>
+			var player = document.createElement('iframe');
+			var width = window.innerWidth || document.body.clientWidth;
+			var w = 0.9 * width;
+			var y = 16 / 9;
+			var h = w / y;
+			player.width = w;
+			player.height = h;
+			
+			var windowsizes = function() {
+				var width = window.innerWidth || document.body.clientWidth;
+				var w = 0.9 * width;
+				var h = w / y;
+				player.width = w;
+				player.height = h;
+				return w;
+			}
+			player.id = 'ls_embed_1510172232';
+			player.frameborder = 0;
+			player.scrolling = 'no';
+			player.allowfullscreen = ' ';
+			player.src = 'https://livestream.com/accounts/5690925/events/6124324/player?width=' + w + '&height=' + h + '&enableInfoAndActivity=true&defaultDrawer=feed&autoPlay=false&mute=false';
+			document.body.appendChild(player);
+			window.addEventListener("resize", windowsizes);
+		</script>
+		<!--<iframe id="ls_embed_1510172232" src="https://livestream.com/accounts/5690925/events/6124324/player?width=960&height=540&enableInfoAndActivity=true&defaultDrawer=feed&autoPlay=false&mute=false" width="960" height="540" frameborder="0" scrolling="no" allowfullscreen></iframe>-->
+	</body>
+</html>
