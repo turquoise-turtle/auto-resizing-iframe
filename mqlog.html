@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+	<head>
+		<title>Responsive embed</title>
+		<!-- http://webdesignerwall.com/tutorials/css-elastic-videos -->
+		<!-- http://webdesignerwall.com/demo/responsive-css-tricks/ -->
+		<style>
+			html, body { width: 100%; height: 100%; }
+			
+			#article {
+				background-color: darkgreen;
+				color: cyan;
+			}
+			
+			.video-container {
+				position: relative;
+				padding-bottom: 56.25%;
+				height: 0;
+				/*overflow: hidden;*/
+			}
+
+			iframe {
+				position: absolute;
+				top: 6%;
+				left: 10%;
+				width: 80%;
+				height: 80%;
+			}
+			
+			.videoSmall, .videoList {
+				display: none;
+			}
+			
+			.alternative {
+				/*display: none;*/
+			}
+			
+			label {
+				padding: 2em;
+				border-radius: 2px;
+				background-color: red;
+				color: white;
+			}
+			
+			@media screen and (orientation: landscape) and (max-width: 1000px) {
+				.videoSmall {
+					display: block;
+				}
+				
+				.videoList {
+					display: none;
+				}
+				
+				#alternative {
+					display: none;
+				}
+			}
+			
+			@media screen and (min-width: 1000px) {
+				.videoSmall {
+					display: none;
+				}
+				.videoList {
+					display: block;
+				}
+				#alternative {
+					display: none;
+				}
+			}
+		</style>
+		
+	</head>
+	<body>
+		<div class="video-container">
+			<div id="alternative">
+				<h2>The video is best viewed in landscape</h2>
+				<br>
+				<label id="myBtn">Continue anyway?</label>
+			</div>
+			<!-- with list of posts, for old version of website until the new website comes in -->
+			<iframe class="videoList" id="ls_embed_1515460680" src="https://livestream.com/accounts/5690925/events/6124324/player?width=960&height=540&enableInfoAndActivity=true&defaultDrawer=feed&autoPlay=true&mute=false" frameborder="0" scrolling="no" allowfullscreen> </iframe>
+			
+			<iframe class="videoSmall" id="ls_embed_1515469474" src="https://livestream.com/accounts/5690925/events/6124324/player?width=960&height=540&enableInfoAndActivity=true&defaultDrawer=&autoPlay=true&mute=false" width="960" height="540" frameborder="0" scrolling="no" allowfullscreen> </iframe>
+		</div>
+		<article id="article">
+		</article>
+		<script>
+			document.getElementById('myBtn').addEventListener('click', function(){
+				document.getElementsByClassName('videoSmall')[0].style = 'display: block;';
+				document.getElementById('alternative').style = 'display: none;';
+			});
+			
+			var article = document.getElementById('article');
+			var width = window.innerWidth || document.body.clientWidth;
+			var height = window.innerHeight || document.body.clientHeight;
+			var w = 0.8 * width;
+			var h = 0.8 * height;
+			article.innerText = 'Real height: ' + height + '. Real width: ' + width + '. \n player height: ' + h + '. player width: ' + w + '.';
+			
+			var windowsizes = function() {
+				var article = document.getElementById('article');
+				var width = window.innerWidth || document.body.clientWidth;
+				var height = window.innerHeight || document.body.clientHeight;
+				var w = 0.8 * width;
+				var h = 0.8 * height;
+				article.innerText = 'Real height: ' + height + 'px. Real width: ' + width + 'px. \n Player height: ' + h + 'px. Player width: ' + w + 'px.';
+				return article
+			}
+			window.addEventListener("resize", windowsizes);
+		</script>
+	</body>
+</html>
