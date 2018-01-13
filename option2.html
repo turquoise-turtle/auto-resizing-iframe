@@ -1,0 +1,53 @@
+<!-- Option 2 -->
+<!-- one iframe, uses media queries so at desktop resolution it fills 80% of width, at tablet resolution 90% of width and at mobile resolution 97% of width -->
+<!doctype html>
+<style>
+	/* .video-container is the container for the iframe which makes it responsive, it also makes sure it stays at 16:9 or something with the padding-bottom: 56.25% */	
+	#video-container {
+		position: relative;
+		padding-bottom: 56.25%;
+		height: 0;
+		overflow: hidden;
+	}
+	.videoIframe {
+		position: absolute;
+		/* change top and left for the amount of space you want have */
+		top: 6%;
+		left: 10%;
+		/* change width and height for how much you want the iframe to be */
+		width: 80%;
+		height: 80%;
+		border: 0;
+	}
+	
+	
+	@media screen and (min-width: 10px) {
+		.videoIframe {
+			top: 1.5%;
+			left: 0%;
+			width: 97%;
+			height: 97%;
+		}
+	}
+	
+	@media screen and (min-width: 400px) {
+		.videoIframe {
+			top: 6%;
+			left: 2.5%;
+			width: 95%;
+			height: 95%;
+		}
+	}
+	
+	@media screen and (min-width: 700px) {
+		.videoIframe {
+			top: 6%;
+			left: 10%;
+			width: 80%;
+			height: 80%;
+		}
+	}
+</style>
+<section id="video-container">
+	<iframe class="videoIframe" id="ls_embed_1515460680" src="https://livestream.com/accounts/5690925/events/6124324/player?width=960&height=540&enableInfoAndActivity=true&defaultDrawer=feed&autoPlay=true&mute=false" allowfullscreen></iframe>
+</section>

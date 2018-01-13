@@ -1,0 +1,112 @@
+<!-- Option 3 -->
+<!-- two iframes, one with the list and one without. The one without the list shows up on mobile, the one with the list shows up on tablet and desktop -->
+<!-- it does have the downside of loading two iframes, even if one isn't ever going to be loaded -->
+<!doctype html>
+<style>
+	#video-container {
+		position: relative;
+		padding-bottom: 56.25%;
+		height: 0;
+		overflow: hidden;
+	}
+	.videoIframe {
+		position: absolute;
+		/* change top and left for the amount of space you want have */
+		top: 6%;
+		left: 10%;
+		/* change width and height for how much you want the iframe to be */
+		width: 80%;
+		height: 80%;
+		border: 0;
+	}
+	
+	@media screen and (min-width: 10px) {
+		.videoList {
+			display: none;
+		}
+		.videoSmall {
+			display: block;
+		}
+		.videoIframe {
+			top: 1.5%;
+			left: 0%;
+			width: 97%;
+			height: 97%;
+		}
+	}
+	
+	
+	@media screen and (min-width: 540px) {
+		.videoList {
+			display: block;
+		}
+		.videoSmall {
+			display: none;
+		}
+		.videoIframe {
+			top: 6%;
+			left: 2.5%;
+			width: 95%;
+			height: 95%;
+		}
+	}
+	@media screen and (min-width: 540px) and (orientation: portrait) {
+		.videoList {
+			display: none;
+		}
+		.videoSmall {
+			display: block;
+		}
+		.videoIframe {
+			top: 6%;
+			left: 2.5%;
+			width: 95%;
+			height: 95%;
+		}
+	}
+	
+	@media screen and (min-width: 700px) {
+		.videoList {
+			display: block;
+		}
+		.videoSmall {
+			display:none;
+		}
+		.videoIframe {
+			top: 6%;
+			left: 10%;
+			width: 80%;
+			height: 80%;
+		}
+	}
+</style>
+<section id="video-container">
+	<iframe class="videoList videoIframe" id="ls_embed_1515460680" src="https://livestream.com/accounts/5690925/events/6124324/player?width=960&height=540&enableInfoAndActivity=true&defaultDrawer=feed&autoPlay=true&mute=false" allowfullscreen> </iframe>
+	
+	<iframe class="videoSmall videoIframe" id="ls_embed_1515469474" src="https://livestream.com/accounts/5690925/events/6124324/player?width=960&height=540&enableInfoAndActivity=true&defaultDrawer=&autoPlay=true&mute=false" allowfullscreen> </iframe>
+</section>
+<script>
+	var monitor = setInterval(function() {
+		var elem = document.activeElement;
+		if (elem.id == 'ls_embed_1515460680') {
+			//playing through videoList, so delete the other video and the alternative content from the page
+			var other = document.getElementsByClassName('videoSmall')[0];
+			other.parentElement.removeChild(other);
+			var alternative = document.getElementById('alternative');
+			alternative.parentElement.removeChild(alternative);
+			console.log(other + ' and ' + alternative + ' hav been removed.');
+			elem.style = 'display: block;';
+			clearInterval(monitor);
+		}
+		if (elem.id == 'ls_embed_1515469474') {
+			//playing throuhg videoSmall, so delete the other video and the alternative content from the page
+			var other = document.getElementsByClassName('videoList')[0];
+			other.parentElement.removeChild(other);
+			var alternative = document.getElementById('alternative');
+			alternative.parentElement.removeChild(alternative);
+			console.log(other + ' and ' + alternative + ' have been removed.');
+			elem.style = 'display: block;';
+			clearInterval(monitor);
+		}
+	}, 100);
+</script>

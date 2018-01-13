@@ -1,0 +1,175 @@
+<!-- Option 4 -->
+<!-- An explainer is shown, once clicked the iframe is loaded onto the page via javascript -->
+<!-- There are two identical explainers, except one of them loads the iframe without the list, and the other with the list -->
+<!doctype html>
+<style>
+			html, body { width: 100%; height: 100%; }
+			
+			.video-container {
+				position: relative;
+				padding-bottom: 56.25%;
+				height: 0;
+				overflow: hidden;
+			}
+			.videoIframe {
+				position: absolute;
+				top: 6%;
+				left: 10%;
+				width: 80%;
+				height: 80%;
+				border: 0;
+			}
+			
+			.explainer {
+				/* so people know they can click on it */
+				cursor: pointer;
+				width: 50%;
+				/*justify-content: center; doesn't seem to do anything*/
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				margin: auto;
+				text-align: center;
+				font-family: sans-serif;
+				line-height: 2em;
+			}
+			.postsIcon {
+				width: 2.5em;
+				height: 2.5em;
+				display: inline-flex;
+				align-self: center;
+				position: relative;
+				bottom: -0.8em;
+			}
+			
+			#explainerS {
+				background-color: red;
+				/* you should probably style this differently */
+			}
+			#explainerL {
+				background-color: blue;
+			}
+			
+			@media screen and (min-width: 10px) {
+				#explainerS {
+					display: flex;
+				}
+				#explainerL {
+					display: none;
+				}
+				.videoIframe {
+					top: 1.5%;
+					left: 0;
+					width: 97%;
+					height: 97%;
+				}
+				.explainer {
+					width: 97%;
+				}
+			}
+			
+			@media screen and (min-width: 500px) {
+				#explainerS {
+					display: flex;
+				}
+				#explainerL {
+					display: none;
+				}
+				.videoIframe {
+					top: 6%;
+					left: 5%;
+					width: 90%;
+					height: 90%;
+				}
+				.explainer {
+					width: 80%;
+				}
+			}
+			
+			@media screen and (min-width: 800px) {
+				#explainerS {
+					display: none;
+				}
+				#explainerL {
+					display: flex;
+				}
+				.videoIframe {
+					top: 6%;
+					left: 10%;
+					width: 80%;
+					height: 80%;
+				}
+				.explainer {
+					width: 50%;
+				}
+			}
+			
+			/* media queries for portrait and landscape. In the explainer shows a message that landscape is suggested but not needed */
+			@media screen and (min-width: 10px) and (orientation: portrait) {
+				.portrait {
+					display: block;
+				}
+				.video-container {
+					overflow: visible;
+				}
+			}
+			@media screen and (min-width: 10px) and (orientation: landscape) {
+				.portrait {
+					display: none;
+				}
+				.video-container {
+					overflow: hidden;
+				}
+			}
+		</style>
+<section class="video-container">
+	<section id="explainerS" class="explainer">
+		<h2>Click this box to watch Eastcoast's videos</h2>
+		<p>Scroll through the list of sermons and click one to watch</p>
+		<p>Or click <strong>"Watch Again"</strong> to watch the most recent sermon</p>
+		<p>You can also click this <svg id="posts" class="postsIcon" viewBox="0 0 29 32"><title>posts</title><path d="M2.909 14.545V29.09h23.273V14.545H2.909zM0 13.101c0-.809.662-1.464 1.443-1.464h26.206c.797 0 1.443.654 1.443 1.464v17.435c0 .809-.662 1.465-1.443 1.465H1.443A1.453 1.453 0 0 1 0 30.536V13.101z"></path><path d="M11.636 17.455l7.273 4.364-7.273 4.364zM2.909 5.818h23.273v2.909H2.909V5.818zM5.818 0h17.455v2.909H5.818V0z"></path></svg> icon to see a list of recent sermons if it doesn't show up</p>
+		<p class="portrait">You can watch the video like this, but we suggest you rotate your device to landscape</p>
+	</section>
+	
+	<section id="explainerL" class="explainer">
+		<h2>Click this box to watch Eastcoast's videos</h2>
+		<p>Scroll through the list of sermons and click one to watch</p>
+		<p>Or click <strong>"Watch Again"</strong> to watch the most recent sermon</p>
+		<p>You can also click this <svg id="posts" class="postsIcon" viewBox="0 0 29 32"><title>posts</title><path d="M2.909 14.545V29.09h23.273V14.545H2.909zM0 13.101c0-.809.662-1.464 1.443-1.464h26.206c.797 0 1.443.654 1.443 1.464v17.435c0 .809-.662 1.465-1.443 1.465H1.443A1.453 1.453 0 0 1 0 30.536V13.101z"></path><path d="M11.636 17.455l7.273 4.364-7.273 4.364zM2.909 5.818h23.273v2.909H2.909V5.818zM5.818 0h17.455v2.909H5.818V0z"></path></svg> icon to see a list of recent sermons if it doesn't show up</p>
+		<p class="portrait">You can watch the video like this, but we suggest you rotate your device to landscape</p>
+	</section>
+</section>
+<script>
+			
+	var container = document.getElementsByClassName('video-container')[0];
+	var explainerS = document.getElementById('explainerS');
+	var explainerL = document.getElementById('explainerL');
+	
+	explainerS.addEventListener('click', function(){
+		//console.log('explainerS clicked');
+		var player = document.createElement('iframe');
+		player.src = 'https://livestream.com/accounts/5690925/events/6124324/player?width=960&height=540&enableInfoAndActivity=true&defaultDrawer=&autoPlay=true&mute=false';
+		player.id = 'ls_embed_1515469474';
+		player.allowfullscreen = 'allowfullscreen';
+		player.classList.add('videoIframe');
+		container.appendChild(player);
+				
+		explainerS.parentNode.removeChild(explainerS);
+		explainerL.parentNode.removeChild(explainerL);
+	});
+			
+	explainerL.addEventListener('click', function(){
+		//console.log('explainerL clicked');
+		var player = document.createElement('iframe');
+		player.src = 'https://livestream.com/accounts/5690925/events/6124324/player?width=960&height=540&enableInfoAndActivity=true&defaultDrawer=feed&autoPlay=true&mute=false';
+		player.id = 'ls_embed_1515460680';
+		player.setAttribute('allowFullScreen', '');
+		player.classList.add('videoIframe');
+		container.appendChild(player);
+				
+		//explainerS.parentNode.removeChild(explainerS);
+		//explainerL.parentNode.removeChild(explainerL);
+		container.removeChild(explainerS);
+		container.removeChild(explainerL);
+	});
+</script>
